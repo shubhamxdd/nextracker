@@ -4,7 +4,7 @@
 
 @layer components {
   .link_styles {
-    @apply transition duration-300 hover:text-neutral-800;
+    @apply transition duration-300 hover:text-neutral-700;
   }
   .underline_span {
     @apply block focus:block active:block max-w-0 transition-all duration-500 h-0.5 rounded bg-zinc-800;
