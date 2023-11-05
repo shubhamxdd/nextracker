@@ -57,3 +57,13 @@
     transform: translateX(95%);
   }
 } */
+
+@keyframes scaleUp {
+  to {
+    transform: scale(80);
+  }
+}
+
+.animate-scaleUp {
+  animation: scaleUp 2s forwards;
+}
