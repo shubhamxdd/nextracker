@@ -20,7 +20,7 @@ const Splash = () => {
 
   return loading ? (
     <div
-      className={`z-50 absolute w-full h-full bg-zinc-200 flex justify-center items-center transition-opacity duration-2000 ${
+      className={`z-50 absolute w-screen h-screen bg-zinc-200 flex justify-center items-center transition-opacity duration-2000 ${
         startAnimation ? "opacity-0" : "opacity-100"
       }`}
     >
