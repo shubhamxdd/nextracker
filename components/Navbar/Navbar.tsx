@@ -18,7 +18,6 @@ const Navbar = () => {
     },
   ];
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <nav className="flex gap-6 mb-5 items-center border-b px-16 max-sm:px-3 max-md:px-4 max-lg:px-10 h-14 justify-between">
       <Logo logo={FaBug} />
