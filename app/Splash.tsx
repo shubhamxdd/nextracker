@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import "./globals.css";
+import { BsFillBugFill } from "react-icons/bs";
 
 const Splash = () => {
   const [loading, setIsLoading] = useState(true);
@@ -16,7 +17,8 @@ const Splash = () => {
     <div
       className={`z-50 absolute w-full h-full bg-zinc-200 flex justify-center items-center`}
     >
-      <div className="loader"></div>
+      <BsFillBugFill size={120} className="animate-pulse" />
+      {/* <div className="loader"></div> */}
     </div>
   ) : null;
 };
