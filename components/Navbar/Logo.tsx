@@ -7,7 +7,7 @@ interface LogoProps {
 
 const Logo = ({ logo: Icon }: LogoProps) => {
   return (
-    <div className="flex gap-[3px] items-center hover:scale-110 active:scale-110 transition">
+    <div className="flex gap-[3px] items-center hover:scale-110 active:scale-110 transition cursor-pointer">
       <Icon size={25} />
       <Link href="/">NexTracker</Link>
     </div>
