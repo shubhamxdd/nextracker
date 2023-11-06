@@ -1,12 +1,13 @@
 "use client";
 
 import { Button, TextField } from "@radix-ui/themes";
-import SimpleMde from "react-simplemde-editor";
+// import SimpleMde from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import dynamic from "next/dynamic";
 
 interface FormShape {
   title: string;
@@ -16,6 +17,11 @@ interface FormShape {
 const NewIssueForm = () => {
   const { register, control, handleSubmit } = useForm<FormShape>();
   const router = useRouter();
+
+  const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
+    ssr: false,
+  });
+
   return (
     <form
       onSubmit={handleSubmit(async (data) => {
