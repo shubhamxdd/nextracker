@@ -4,9 +4,13 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Splash from "./Splash";
 import "@radix-ui/themes/styles.css";
+import "@/app/theme-config.css";
 import { Theme } from "@radix-ui/themes";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,11 +24,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.variable}>
         <Theme>
-          <Splash />
+          {/* <Splash /> */}
           <Navbar />
-          <main>{children}</main>
+          <main className="px-16">{children}</main>
         </Theme>
       </body>
     </html>
