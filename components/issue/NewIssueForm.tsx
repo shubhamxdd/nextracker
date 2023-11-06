@@ -6,6 +6,7 @@ import "easymde/dist/easymde.min.css";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface FormShape {
   title: string;
@@ -20,7 +21,14 @@ const NewIssueForm = () => {
       onSubmit={handleSubmit(async (data) => {
         await axios
           .post("/api/issues", data)
-          .then(() => router.push("/issues"));
+          .then(() => {
+            toast.success("Issue created successfully");
+            router.push("/issues");
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error("Error creating issue");
+          });
       })}
       className="max-w-xl space-y-4"
     >

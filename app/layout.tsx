@@ -6,6 +6,7 @@ import Splash from "./Splash";
 import "@radix-ui/themes/styles.css";
 import "@/app/theme-config.css";
 import { Theme } from "@radix-ui/themes";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
+        <Toaster />
         <Theme>
           {/* <Splash /> */}
           <Navbar />
