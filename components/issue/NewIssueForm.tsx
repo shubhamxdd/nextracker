@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/zodSchema/createIssueSchema";
 import { z } from "zod";
 import { BsFillBugFill } from "react-icons/bs";
+import Error from "../Error";
 // import SimpleMde from "react-simplemde-editor";
 
 const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
@@ -54,11 +55,8 @@ const NewIssueForm = () => {
       <TextField.Root>
         <TextField.Input placeholder="Enter title" {...register("title")} />
       </TextField.Root>
-      {errors.title && (
-        <Text color="red" as="p">
-          {errors.title.message}
-        </Text>
-      )}
+      <Error />
+      <Error>{errors?.title?.message}</Error>
       <Controller
         name="description"
         render={({ field }) => (
@@ -66,11 +64,7 @@ const NewIssueForm = () => {
         )}
         control={control}
       />
-      {errors.description && (
-        <Text color="red" as="p">
-          {errors.description.message}
-        </Text>
-      )}
+      <Error>{errors?.description?.message}</Error>
       <Button>Create Issue</Button>
     </form>
   );
