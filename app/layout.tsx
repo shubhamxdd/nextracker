@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={inter.variable}>
         <Toaster />
         <Theme>
-          {/* <Splash /> */}
+          <Splash />
           <Navbar />
           <main className="px-16">{children}</main>
         </Theme>
