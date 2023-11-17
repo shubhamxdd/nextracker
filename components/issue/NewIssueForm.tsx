@@ -12,7 +12,8 @@ import { createIssueSchema } from "@/zodSchema/createIssueSchema";
 import { z } from "zod";
 import { BsFillBugFill } from "react-icons/bs";
 import Error from "../Error";
-// import SimpleMde from "react-simplemde-editor";
+import Spinner from "../Spinner";
+import { useState } from "react";
 
 const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -27,6 +28,7 @@ const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
 type FormShape = z.infer<typeof createIssueSchema>;
 
 const NewIssueForm = () => {
+  const [submit, setSubmit] = useState(false);
   const {
     register,
     control,
@@ -41,13 +43,17 @@ const NewIssueForm = () => {
     <form
       onSubmit={handleSubmit(async (data) => {
         try {
+          setSubmit(true);
           await axios.post("/api/issues", data);
           toast.success("Issue created successfully");
+          setSubmit(false);
           router.push("/issues");
         } catch (error) {
+          setSubmit(false);
           console.log(error);
-
           toast.error("Error creating issue");
+        } finally {
+          setSubmit(false);
         }
       })}
       className="max-w-xl space-y-2"
@@ -65,7 +71,7 @@ const NewIssueForm = () => {
         control={control}
       />
       <Error>{errors?.description?.message}</Error>
-      <Button>Create Issue</Button>
+      <Button disabled={submit}>Create Issue {submit && <Spinner />}</Button>
     </form>
   );
 };
