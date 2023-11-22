@@ -56,7 +56,7 @@ const NewIssueForm = () => {
           setSubmit(false);
         }
       })}
-      className="max-w-xl space-y-2"
+      className="max-w-xl space-y-2 w-full"
     >
       <TextField.Root>
         <TextField.Input placeholder="Enter title" {...register("title")} />
