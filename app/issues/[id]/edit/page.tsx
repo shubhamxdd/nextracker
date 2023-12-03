@@ -1,4 +1,4 @@
-import NewIssueForm from "@/components/issue/NewIssueForm";
+import IssueForm from "@/components/issue/NewIssueForm";
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 
@@ -18,7 +18,7 @@ const EditIssuePage = async ({ params: { id } }: EditIssuePageProps) => {
   return (
     <div className="flex-col flex items-center">
       <h1 className="text-2xl my-4">Update Issue</h1>
-      <NewIssueForm issue={issue} />
+      <IssueForm issue={issue} />
     </div>
   );
 };

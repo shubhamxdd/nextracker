@@ -33,7 +33,7 @@ interface Props {
 }
 
 // todo Change name
-const NewIssueForm = ({ issue }: Props) => {
+const IssueForm = ({ issue }: Props) => {
   const [submit, setSubmit] = useState(false);
   const {
     register,
@@ -99,4 +99,4 @@ const NewIssueForm = ({ issue }: Props) => {
   );
 };
 
-export default NewIssueForm;
+export default IssueForm;
