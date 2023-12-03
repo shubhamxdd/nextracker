@@ -1,5 +1,7 @@
+// export const dynamic = "force-dynamic";
+import StatusBadge from "@/components/StatusBadge";
 import prisma from "@/prisma/client";
-import { Badge, Button, Table } from "@radix-ui/themes";
+import { Button, Table } from "@radix-ui/themes";
 import Link from "next/link";
 
 const IssuePage = async () => {
@@ -30,11 +32,11 @@ const IssuePage = async () => {
               <Table.Cell className="flex gap-2">
                 {issue.title}
                 <div className="block md:hidden">
-                  <Badge>{issue.status}</Badge>
+                  <StatusBadge status={issue.status} />
                 </div>
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
-                <Badge>{issue.status}</Badge>
+                <StatusBadge status={issue.status} />
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
                 {issue.createdAt.toDateString()}
