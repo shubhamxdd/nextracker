@@ -6,25 +6,24 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import dynamic from "next/dynamic";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { issueSchema } from "@/zodSchema/createIssueSchema";
 import { z } from "zod";
-import { BsFillBugFill } from "react-icons/bs";
 import Error from "../Error";
 import Spinner from "../Spinner";
 import { useState } from "react";
 import { Issue } from "@prisma/client";
+import SimpleMde from "react-simplemde-editor";
 
-const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
-  ssr: false,
-  loading: () => (
-    <div className="flex justify-center items-center">
-      <BsFillBugFill size={80} className="animate-pulse my-20 mx-8" />
-      <Text size={"5"}>loading markdown editor</Text>
-    </div>
-  ),
-});
+// const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
+//   ssr: false,
+  // loading: () => (
+  //   <div className="flex justify-center items-center">
+  //     <BsFillBugFill size={80} className="animate-pulse my-20 mx-8" />
+  //     <Text size={"5"}>loading markdown editor</Text>
+  //   </div>
+  // ),
+// });
 
 type FormShape = z.infer<typeof issueSchema>;
 

@@ -1,7 +1,7 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const IssueFormSkeletonn = () => {
+const IssueFormSkeleton = () => {
   return (
     <>
       <div className="flex-col items-center flex">
@@ -17,4 +17,4 @@ const IssueFormSkeletonn = () => {
   );
 };
 
-export default IssueFormSkeletonn;
+export default IssueFormSkeleton;
