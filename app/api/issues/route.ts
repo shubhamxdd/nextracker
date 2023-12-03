@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
-import { createIssueSchema } from "@/zodSchema/createIssueSchema";
+import { issueSchema } from "@/zodSchema/createIssueSchema";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const valid = createIssueSchema.safeParse(body);
+  const valid = issueSchema.safeParse(body);
   const { title, description } = body;
 
   if (!valid.success)
