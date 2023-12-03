@@ -26,7 +26,7 @@ const IssuePage = async () => {
         <Table.Body>
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
-              <Table.Cell className="flex gap-2">
+              <Table.Cell className="flex-row">
                 <Link href={`/issues/${issue.id}`}>
                   {issue.title}
                   <div className="block md:hidden">
