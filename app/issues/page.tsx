@@ -1,4 +1,4 @@
-// export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic";
 import StatusBadge from "@/components/StatusBadge";
 import prisma from "@/prisma/client";
 import { Table } from "@radix-ui/themes";
