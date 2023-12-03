@@ -6,7 +6,6 @@ export async function PATCH(
   request: NextRequest,
   params: { params: { id: string } }
 ) {
-  console.log(params.params.id);
   const body = await request.json();
   const valid = issueSchema.safeParse(body);
   if (!valid.success)
