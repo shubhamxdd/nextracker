@@ -11,7 +11,7 @@ const IssuePage = async () => {
     <>
       <h1 className="text-center text-2xl font-semibold">IssuePage</h1>
       <IssueActions />
-      <Table.Root variant="surface">
+      <Table.Root variant="surface" className="mb-5">
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
