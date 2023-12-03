@@ -1,20 +1,18 @@
-import { TextField } from "@radix-ui/themes";
+import { Box, TextField } from "@radix-ui/themes";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const CreateIssueLoading = () => {
   return (
     <>
-      <div className="flex-col flex items-center h-full">
+      <div className="flex-col flex items-center">
         <h1 className="text-2xl my-4">
-          <Skeleton />
+          <Skeleton width={200} />
         </h1>
-        <div className="max-w-xl space-y-2 w-full">
+        <Box className="max-w-xl space-y-2 w-full">
           <Skeleton />
-          <div className="h-[40vh]">
-            <Skeleton />
-          </div>
-        </div>
+          <Skeleton height={200} />
+        </Box>
       </div>
     </>
   );
