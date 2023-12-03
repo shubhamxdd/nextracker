@@ -14,6 +14,7 @@ import { BsFillBugFill } from "react-icons/bs";
 import Error from "../Error";
 import Spinner from "../Spinner";
 import { useState } from "react";
+import { Issue } from "@prisma/client";
 
 const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -27,7 +28,12 @@ const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
 
 type FormShape = z.infer<typeof createIssueSchema>;
 
-const NewIssueForm = () => {
+interface Props {
+  issue?: Issue;
+}
+
+// todo Change name
+const NewIssueForm = ({ issue }: Props) => {
   const [submit, setSubmit] = useState(false);
   const {
     register,
@@ -59,7 +65,11 @@ const NewIssueForm = () => {
       className="max-w-xl space-y-2 w-full"
     >
       <TextField.Root>
-        <TextField.Input placeholder="Enter title" {...register("title")} />
+        <TextField.Input
+          defaultValue={issue?.title}
+          placeholder="Enter title"
+          {...register("title")}
+        />
       </TextField.Root>
       <Error />
       <Error>{errors?.title?.message}</Error>
@@ -68,10 +78,14 @@ const NewIssueForm = () => {
         render={({ field }) => (
           <SimpleMde placeholder="Enter description" {...field} />
         )}
+        defaultValue={issue?.description}
         control={control}
       />
       <Error>{errors?.description?.message}</Error>
-      <Button disabled={submit}>Create Issue {submit && <Spinner />}</Button>
+      <Button disabled={submit}>
+        {" "}
+        {issue?.id ? "Update" : "Create"} Issue {submit && <Spinner />}
+      </Button>
     </form>
   );
 };
