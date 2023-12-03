@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createIssueSchema } from "@/zodSchema/createIssueSchema";
+import { issueSchema } from "@/zodSchema/createIssueSchema";
 import { z } from "zod";
 import { BsFillBugFill } from "react-icons/bs";
 import Error from "../Error";
@@ -26,7 +26,7 @@ const SimpleMde = dynamic(() => import("react-simplemde-editor"), {
   ),
 });
 
-type FormShape = z.infer<typeof createIssueSchema>;
+type FormShape = z.infer<typeof issueSchema>;
 
 interface Props {
   issue?: Issue;
@@ -41,7 +41,7 @@ const NewIssueForm = ({ issue }: Props) => {
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<FormShape>({
-    resolver: zodResolver(createIssueSchema),
+    resolver: zodResolver(issueSchema),
   });
   const router = useRouter();
 
@@ -50,10 +50,19 @@ const NewIssueForm = ({ issue }: Props) => {
       onSubmit={handleSubmit(async (data) => {
         try {
           setSubmit(true);
-          await axios.post("/api/issues", data);
-          toast.success("Issue created successfully");
+          {
+            issue?.id
+              ? await axios.patch(`/api/issues/${issue.id}`, data)
+              : await axios.post("/api/issues", data);
+          }
+          {
+            issue?.id
+              ? toast.success("Issue updated successfully")
+              : toast.success("Issue created successfully");
+          }
           setSubmit(false);
           router.push("/issues");
+          router.refresh();
         } catch (error) {
           setSubmit(false);
           console.log(error);
