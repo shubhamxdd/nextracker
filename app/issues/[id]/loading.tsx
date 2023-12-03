@@ -1,22 +1,19 @@
+import { Flex, Card, Box } from "@radix-ui/themes";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const IssueLoadingPage = () => {
   return (
-    <div>
-      <p>
-        <Skeleton width={150} />
-      </p>
-      <p>
-        <Skeleton width={250} />
-      </p>
-      <p>
-        <Skeleton width={200} />
-      </p>
-      <p>
+    <Box>
+      <Skeleton />
+      <Flex gap={"3"} my={"2"}>
+        <Skeleton width={50} />
         <Skeleton width={100} />
-      </p>
-    </div>
+      </Flex>
+      <Card className="prose" mt={"4"}>
+        <Skeleton count={3} />
+      </Card>
+    </Box>
   );
 };
 
