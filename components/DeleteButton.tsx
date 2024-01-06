@@ -5,30 +5,40 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Spinner from "./Spinner";
 
 interface DeleteButtonProps {
   id: string;
 }
 
 const DeleteButton = ({ id }: DeleteButtonProps) => {
-  const [error, setError] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const router = useRouter();
   const onClick = async () => {
     try {
+      setDeleting(true);
       await axios.delete(`/api/issues/${id}`);
       router.push("/issues");
       router.refresh();
+      toast.success("Issue deleted successfully.");
+      setDeleting(false);
     } catch (error) {
+      setDeleting(false);
       toast.error("Something went wrong.");
-      setError(true);
+    } finally {
+      setDeleting(false);
     }
   };
   return (
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <button className="bg-red-500 px-4 py-1 text-white rounded-md">
-            Delete Issue
+          <button
+            className="bg-red-500 px-4 py-1 text-white rounded-md"
+            disabled={deleting}
+          >
+            Delete Issue{"   "}
+            {deleting && <Spinner />}
           </button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
@@ -46,8 +56,10 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
               <button
                 className="bg-red-500 px-4 py-1 text-white rounded-md"
                 onClick={onClick}
+                disabled={deleting}
               >
-                Yes! Delete Issue
+                Yes! Delete Issue{"   "}
+                {deleting && <Spinner />}
               </button>
             </AlertDialog.Action>
           </Flex>
