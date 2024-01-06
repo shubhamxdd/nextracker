@@ -27,7 +27,9 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger>
-          <Button color="red">Delete Issue</Button>
+          <button className="bg-red-500 px-4 py-1 text-white rounded-md">
+            Delete Issue
+          </button>
         </AlertDialog.Trigger>
         <AlertDialog.Content>
           <AlertDialog.Title>Are you sure?</AlertDialog.Title>
@@ -41,9 +43,12 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button variant="solid" color="red" onClick={onClick}>
+              <button
+                className="bg-red-500 px-4 py-1 text-white rounded-md"
+                onClick={onClick}
+              >
                 Yes! Delete Issue
-              </Button>
+              </button>
             </AlertDialog.Action>
           </Flex>
         </AlertDialog.Content>
