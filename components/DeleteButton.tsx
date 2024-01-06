@@ -3,17 +3,25 @@
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 interface DeleteButtonProps {
   id: string;
 }
 
 const DeleteButton = ({ id }: DeleteButtonProps) => {
+  const [error, setError] = useState(false);
   const router = useRouter();
   const onClick = async () => {
-    await axios.delete(`/api/issues/${id}`);
-    router.push("/issues");
-    router.refresh();
+    try {
+      await axios.delete(`/api/issues/${id}`);
+      router.push("/issues");
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong.");
+      setError(true);
+    }
   };
   return (
     <>
@@ -26,7 +34,6 @@ const DeleteButton = ({ id }: DeleteButtonProps) => {
           <AlertDialog.Description>
             This will permanently delete the issue.
           </AlertDialog.Description>
-
           <Flex gap="3" mt="4" justify="end">
             <AlertDialog.Cancel>
               <Button variant="soft" color="gray">
