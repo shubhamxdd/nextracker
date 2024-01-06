@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Splash from "./Splash";
 import "@radix-ui/themes/styles.css";
 import "@/app/theme-config.css";
-import { Theme } from "@radix-ui/themes";
+import { Container, Theme } from "@radix-ui/themes";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
@@ -30,7 +30,9 @@ export default function RootLayout({
         <Theme>
           <Splash />
           <Navbar />
-          <main className="px-16">{children}</main>
+          <main className="px-16">
+            <Container>{children}</Container>
+          </main>
         </Theme>
       </body>
     </html>
