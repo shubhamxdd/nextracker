@@ -21,6 +21,7 @@
     "next-auth": "^4.24.5",
     "prisma": "^5.5.2",
     "react": "^18",
+    "react-confetti": "^6.1.0",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
     "react-hot-toast": "^2.4.1",
