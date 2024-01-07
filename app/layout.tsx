@@ -32,7 +32,7 @@ export default function RootLayout({
           <AuthProvider>
             <Toaster />
             <Theme>
-              {/* <Splash /> */}
+              <Splash />
               <Navbar />
               <main className="px-16">
                 <Container>{children}</Container>
