@@ -8,6 +8,7 @@ import "@/app/theme-config.css";
 import { Container, Theme } from "@radix-ui/themes";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "./auth/Providers";
+import QueryClientProvider from "./QueryClientProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,16 +28,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.variable}>
-        <AuthProvider>
-          <Toaster />
-          <Theme>
-            <Splash />
-            <Navbar />
-            <main className="px-16">
-              <Container>{children}</Container>
-            </main>
-          </Theme>
-        </AuthProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <Toaster />
+            <Theme>
+              {/* <Splash /> */}
+              <Navbar />
+              <main className="px-16">
+                <Container>{children}</Container>
+              </main>
+            </Theme>
+          </AuthProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
