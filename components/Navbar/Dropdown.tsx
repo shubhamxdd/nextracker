@@ -5,12 +5,26 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
 const Dropdown = () => {
   const { status, data: session } = useSession();
 
+  if (status === "loading") return <Skeleton width="3rem" />;
+
+  if (status === "unauthenticated")
+    return (
+      <Link
+        href={"/api/auth/signin"}
+        className="text-neutral-500 hover:text-neutral-900 transition duration-300"
+      >
+        Signin
+      </Link>
+    );
+
   return (
     <div>
-      {" "}
       <Box>
         {status === "authenticated" && (
           <DropdownMenu.Root>
@@ -28,15 +42,15 @@ const Dropdown = () => {
                 <Text size={"2"}>{session.user?.email}</Text>
               </DropdownMenu.Label>
               <DropdownMenu.Item>
-                <Link href="/api/auth/signout">Logout</Link>
+                <Link
+                  href="/api/auth/signout"
+                  className="text-neutral-500 hover:text-neutral-900 transition duration-300"
+                >
+                  Logout
+                </Link>
               </DropdownMenu.Item>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
-        )}
-        {status === "unauthenticated" && (
-          <>
-            <Link href={"/api/auth/signin"}>Signin</Link>
-          </>
         )}
       </Box>
     </div>
