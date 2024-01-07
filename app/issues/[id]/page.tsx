@@ -6,6 +6,7 @@ import IssueDetailsPage from "./IssueDetailsPage";
 import DeleteButton from "@/components/DeleteButton";
 import { getServerSession } from "next-auth";
 import authOption from "@/app/auth/authOptions";
+import AssigneeIssue from "@/components/AssigneeIssue";
 
 interface IssuePageProps {
   params: { id: string };
@@ -24,16 +25,15 @@ const IssuePage = async ({ params }: IssuePageProps) => {
       <Box className="md:col-span-4">
         <IssueDetailsPage issue={issue} />
       </Box>
-      <Box>
-        <Flex direction="column" gap="4">
-          {session && (
-            <>
-              <EditIssueBtn id={issue.id} />
-              <DeleteButton id={issue.id} />
-            </>
-          )}
-        </Flex>
-      </Box>
+      {session && (
+        <Box>
+          <Flex direction="column" gap="4">
+            <AssigneeIssue />
+            <EditIssueBtn id={issue.id} />
+            <DeleteButton id={issue.id} />
+          </Flex>
+        </Box>
+      )}
     </Grid>
   );
 };
