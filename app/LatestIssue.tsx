@@ -16,7 +16,9 @@ const LatestIssue = async () => {
   return (
     <>
       <Card>
-        <Heading mt="2" ml="3" mb="5">Latest Issues</Heading>
+        <Heading mt="2" ml="3" mb="5">
+          Latest Issues
+        </Heading>
         <Table.Root>
           <Table.Body>
             {latestIssues.map((issue) => (
@@ -46,6 +48,12 @@ const LatestIssue = async () => {
             ))}
           </Table.Body>
         </Table.Root>
+        <Link
+          href={"/issues"}
+          className="float-end mt-4 mb-2 text-sm text-blue-800"
+        >
+          Click here for more issues
+        </Link>
       </Card>
     </>
   );
