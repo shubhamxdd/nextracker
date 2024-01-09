@@ -4,20 +4,46 @@ import prisma from "@/prisma/client";
 import { Table } from "@radix-ui/themes";
 import IssueActions from "./IssueActions";
 import Link from "@/components/Link";
-import { Status } from "@prisma/client";
+import NextLink from "next/link";
+import { Issue, Status } from "@prisma/client";
+
+import { IoIosArrowUp } from "react-icons/io";
 
 const IssuePage = async ({
   searchParams,
 }: {
-  searchParams: { status: Status };
+  searchParams: { status: Status; orderBy: keyof Issue };
 }) => {
+  const columns: { label: string; value: keyof Issue; className?: string }[] = [
+    {
+      label: "Issue",
+      value: "title",
+    },
+    {
+      label: "Status",
+      value: "status",
+      className: "hidden md:table-cell",
+    },
+    {
+      label: "Created At",
+      value: "createdAt",
+      className: "hidden md:table-cell",
+    },
+  ];
   const statuses = Object.values(Status);
   const status = statuses.includes(searchParams.status)
     ? searchParams.status
     : undefined;
+
+  const orderBy = columns.map((col) => col.value).includes(searchParams.orderBy)
+    ? { [searchParams.orderBy]: "asc" }
+    : undefined;
+
   const issues = await prisma.issue.findMany({
     where: { status },
+    orderBy,
   });
+
   return (
     <>
       <h1 className="text-center text-2xl font-semibold">IssuePage</h1>
@@ -25,13 +51,18 @@ const IssuePage = async ({
       <Table.Root variant="surface" className="mb-5">
         <Table.Header>
           <Table.Row>
-            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
-              Status
-            </Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className="hidden md:table-cell">
-              Created At
-            </Table.ColumnHeaderCell>
+            {columns.map((col) => (
+              <Table.ColumnHeaderCell key={col.value} className={col.className}>
+                <NextLink
+                  href={{ query: { ...searchParams, orderBy: col.value } }}
+                >
+                  {col.label}
+                </NextLink>
+                {col.value === searchParams.orderBy && (
+                  <IoIosArrowUp className="inline" />
+                )}
+              </Table.ColumnHeaderCell>
+            ))}
           </Table.Row>
         </Table.Header>
         <Table.Body>

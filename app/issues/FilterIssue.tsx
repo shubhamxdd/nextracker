@@ -2,10 +2,11 @@
 
 import { Status } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const FilterIssue = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const statuses: { label: string; value?: Status }[] = [
     {
       label: "All",
@@ -25,8 +26,15 @@ const FilterIssue = () => {
   ];
   return (
     <Select.Root
+      defaultValue={searchParams.get("status") || ""}
       onValueChange={(status) => {
-        const queryParam = status ? `?status=${status}` : "";
+        const params = new URLSearchParams();
+        if (status) params.append("status", status);
+
+        if (searchParams.get("orderBy"))
+          params.append("orderBy", searchParams.get("orderBy")!);
+
+        const queryParam = params.size ? "?" + params.toString() : "";
         if (status === " ") router.push(`/issues`);
         else router.push(`/issues${queryParam}`);
       }}
