@@ -7,6 +7,7 @@ import DeleteButton from "@/components/DeleteButton";
 import { getServerSession } from "next-auth";
 import authOption from "@/app/auth/authOptions";
 import AssigneeIssue from "@/components/AssigneeIssue";
+import { title } from "process";
 
 interface IssuePageProps {
   params: { id: string };
@@ -39,3 +40,15 @@ const IssuePage = async ({ params }: IssuePageProps) => {
 };
 
 export default IssuePage;
+
+export async function generateMetadata({ params }: IssuePageProps) {
+  const issue = await prisma.issue.findUnique({
+    where: {
+      id: params.id,
+    },
+  });
+  return {
+    title: `Nextracker - ${issue?.title}`,
+    description: issue?.description,
+  };
+}

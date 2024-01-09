@@ -3,6 +3,7 @@ import IssueSummary from "./IssueSummary";
 import LatestIssue from "./LatestIssue";
 import prisma from "@/prisma/client";
 import IssueChart from "./IssueChart";
+import { Metadata } from "next";
 
 export default async function Home() {
   const open = await prisma.issue.count({
@@ -26,3 +27,8 @@ export default async function Home() {
     </>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Nextracker - Dashboard",
+  description: "Homepage of Nextracker",
+};

@@ -4,6 +4,7 @@ import IssueActions from "./IssueActions";
 import { Status } from "@prisma/client";
 import Pagination from "@/components/Pagination";
 import IssueTable, { IssueQuery, columnNames } from "./IssueTable";
+import { Metadata } from "next";
 
 interface Props {
   searchParams: IssueQuery;
@@ -51,3 +52,8 @@ const IssuePage = async ({ searchParams }: Props) => {
 };
 
 export default IssuePage;
+
+export const metadata: Metadata = {
+  title: "Nextracker - Issues List",
+  description: "View all issues.",
+};
