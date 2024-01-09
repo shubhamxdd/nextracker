@@ -7,7 +7,6 @@ import DeleteButton from "@/components/DeleteButton";
 import { getServerSession } from "next-auth";
 import authOption from "@/app/auth/authOptions";
 import AssigneeIssue from "@/components/AssigneeIssue";
-import { title } from "process";
 
 interface IssuePageProps {
   params: { id: string };
