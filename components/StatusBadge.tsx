@@ -3,6 +3,7 @@ import { Badge } from "@radix-ui/themes";
 
 interface StatusBadgeProps {
   status: Status;
+  summary?: boolean;
 }
 
 const statusMap: Record<
@@ -14,9 +15,11 @@ const statusMap: Record<
   CLOSED: { label: "Closed", color: "green" },
 };
 
-const StatusBadge = ({ status }: StatusBadgeProps) => {
+const StatusBadge = ({ status, summary }: StatusBadgeProps) => {
   return (
-    <Badge color={statusMap[status].color}>{statusMap[status].label}</Badge>
+    <Badge color={statusMap[status].color} size={summary ? "2" : "1"}>
+      {statusMap[status].label} {summary && "Issues"}
+    </Badge>
   );
 };
 
